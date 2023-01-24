@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Almarai', sans-serif;
+}
+
+.cardList {
+  cursor: pointer;
+  transition: .5s;
+  font-size: 13px;
+}
+
+.cardList:hover {
+  transform: scale(1.1);
+}
+
+.cardList:hover img {
+  opacity: .7;
+}
+
+.cardList:hover .cardMove {
+  opacity: 1;
+  visibility: visible;
+  text-align: center;
+}
+
+.cardMove {
+  background-color: #0d6dfd9a;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: .5s;
+  opacity: 0;
+  visibility: none;
+}
