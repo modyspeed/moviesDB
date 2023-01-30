@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { getPaginationMovies } from "../redux/action/MoviesAction";
+import { useSelector, useDispatch } from "react-redux";
 
+export const PaginationMoveies = () => {
+  const [pageCount, setPageCount] = useState(0);
+  const pages = useSelector((state) => state.pages);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setPageCount(pages);
+  }, [pages]);
 
-export const PaginationMoveies = ({getPage,pageCount}) => {
   const handlePageClick = (data) => {
-    getPage(data.selected +1);
+    dispatch(getPaginationMovies(data.selected + 1));
   };
-
   return (
-    <ReactPaginate 
-  
+    <ReactPaginate
       breakLabel="..."
       nextLabel="التالى"
       onPageChange={handlePageClick}
@@ -27,9 +33,6 @@ export const PaginationMoveies = ({getPage,pageCount}) => {
       breakClassName="page-item"
       breakLinkClassName="page-link"
       activeClassName="active"
-  
-      
     />
-  
   );
 };

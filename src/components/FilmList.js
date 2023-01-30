@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Cards } from "./Cards";
 import { Row, Col } from "react-bootstrap";
 import { PaginationMoveies } from "./PaginationMoveies";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllMovie } from "../redux/action/MoviesAction";
 
-export const FilmList = ({ movies, getPage, pageCount }) => {
+export const FilmList = () => {
+  const [movies, setMovies] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllMovie());
+  }, []);
+  const moviesData = useSelector((state) => state.movies);
+  useEffect(() => {
+    setMovies(moviesData);
+  }, [moviesData]);
+
+
   return (
     <Row className="  my-3 ">
       {movies.length ? (
@@ -17,7 +30,9 @@ export const FilmList = ({ movies, getPage, pageCount }) => {
       ) : (
         <h2 className="text-center">لا يوجد افلام.....</h2>
       )}
-      {movies.length?(<PaginationMoveies getPage={getPage} pageCount={pageCount} />):null}
+      {movies.length ? (
+        <PaginationMoveies  />
+      ) : null}
     </Row>
   );
 };

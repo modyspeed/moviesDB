@@ -1,46 +1,51 @@
 import React from "react";
-import logo from "../images/logo.jpg"
-import {
-  Row,
-  Col,
-  Nav,
-  Navbar,
-  Container,
-  Form,
-
-} from "react-bootstrap";
-
-export const NavBar = ({search}) => {
-  const HandlerSearch=(word) => { 
-     search(word)
-   }
+import logo from "../images/logo.jpg";
+import { Row, Col, Nav, Navbar, Container, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { getAllMovie, getAllMovieSearch } from "../redux/action/MoviesAction";
+export const NavBar = () => {
+  const HandlerSearch = (word) => {
+    search(word);
+  };
+  const dispatch = useDispatch();
+  //search from api
+  const search = (word) => {
+    if (word === "") {
+      dispatch(getAllMovie());
+    } else {
+      dispatch(getAllMovieSearch(word));
+    }
+  };
   return (
-    <Row >
+    <Row>
       <Col sm="12">
         <Navbar bg="dark" variant="dark" expand="lg">
-          <Container >
-            <Navbar.Brand href="#" >
+          <Container>
+            <Navbar.Brand href="#">
               <a href="/">
-              <img style={{width:"60px",height:"60px",borderRadius:"50%"}} src={logo} alt="logo" /></a></Navbar.Brand>
-              
+                <img
+                  style={{ width: "60px", height: "60px", borderRadius: "50%" }}
+                  src={logo}
+                  alt="logo"
+                />
+              </a>
+            </Navbar.Brand>
+
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav
                 className="me-auto my-2 my-lg-0"
                 style={{ maxHeight: "100px" }}
                 navbarScroll
-              >
-
-              </Nav>
+              ></Nav>
               <Form className="d-flex flex-fill">
                 <Form.Control
                   type="search"
                   placeholder="ابحث هنا"
                   className="me-2 "
                   aria-label="Search"
-                  onChange={(e)=> HandlerSearch(e.target.value)}
+                  onChange={(e) => HandlerSearch(e.target.value)}
                 />
-                
               </Form>
             </Navbar.Collapse>
           </Container>
